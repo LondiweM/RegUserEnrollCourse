@@ -5,7 +5,10 @@ import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
 import org.testng.annotations.Test;
 
+import static Common.CommonTestData.*;
+import static Common.GenerateTestData.*;
 import static requestBuilder.RequestBuilder.*;
+import static requestBuilder.RequestBuilder.courseId;
 
 public class NdosiAutomationAPITests {
 
@@ -70,8 +73,46 @@ public class NdosiAutomationAPITests {
                 assertThat().
                 statusCode(badRequest);
     }
+    @Test(dependsOnMethods = "loginAsCreatedUserTests")
+    @Description("As an api user i want to get course list as a user")
+    @Severity(SeverityLevel.NORMAL)
+    public void getCourseListTests() {
+        getCourses().
+                then().
+                assertThat().
+                statusCode(Success_Status);
+    }
 
+    @Test(dependsOnMethods = "approveUserTests")
+    @Description("Login as newly approved user")
+    @Severity(SeverityLevel.BLOCKER)
+    public void loginAsCreatedUserTests() {
 
+        loginrResponse(email, password)
+                .then()
+                .assertThat()
+                .statusCode(Success_Status);
+    }
+   @Test(dependsOnMethods = "getCourseListTests")
+    //@Test
+    @Description("As an api user i want to enroll the user to a course")
+    @Severity(SeverityLevel.BLOCKER)
+    public void enrollUserToCourseTests() {
+        enrollCourse(courseId).
+                then().
+                assertThat().
+                statusCode(Creation_Success);
+    }
+    @Test(dependsOnMethods = "enrollUserToCourseTests")
+    @Description("Verify that user is enrolled in the course")
+    @Severity(SeverityLevel.BLOCKER)
+    public void verifyUserEnrollmentTests() {
+
+        getMyEnrollments()
+                .then()
+                .assertThat()
+                .statusCode(Success_Status);
+    }
 
 
 }
