@@ -10,7 +10,7 @@ import static Common.GenerateTestData.*;
 import static requestBuilder.RequestBuilder.*;
 import static requestBuilder.RequestBuilder.courseId;
 
-public class NdosiAutomationAPITests {
+public class UserRegisterEnrollAPITests {
 
     @Test
     @Description("As an api user i want to create the new user")
@@ -26,7 +26,7 @@ public class NdosiAutomationAPITests {
     @Description("As an api user i want to login as admin user")
     @Severity(SeverityLevel.BLOCKER)
     public void loginAsAdminUserTests() {
-        loginrResponse(adminUsername, adminPassword).
+        loginResponse(adminUsername, adminPassword).
                 then().
                 assertThat().
                 statusCode(Success_Status);
@@ -88,12 +88,12 @@ public class NdosiAutomationAPITests {
     @Severity(SeverityLevel.BLOCKER)
     public void loginAsCreatedUserTests() {
 
-        loginrResponse(email, password)
+        loginResponse(email, password)
                 .then()
                 .assertThat()
                 .statusCode(Success_Status);
     }
-   @Test(dependsOnMethods = "getCourseListTests")
+    @Test(dependsOnMethods = "getCourseListTests")
     //@Test
     @Description("As an api user i want to enroll the user to a course")
     @Severity(SeverityLevel.BLOCKER)

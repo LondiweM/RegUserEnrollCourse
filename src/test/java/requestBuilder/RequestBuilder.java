@@ -28,7 +28,7 @@ public class RequestBuilder {
         return response;
     }
 
-    public static Response loginrResponse(String userName, String password) {
+    public static Response loginResponse(String userName, String password) {
         Response response = given().
                 when().
                 body(loginPayload(userName, password)).
@@ -43,7 +43,7 @@ public class RequestBuilder {
     }
 
     public static Response approveUser() {
-        Response response = given().
+        Response approve = given().
                 when().
                 contentType(contentType).
                 header("Authorization", "Bearer " + token).
@@ -52,12 +52,12 @@ public class RequestBuilder {
                 then().
                 log().all().
                 extract().response();
-        return response;
+        return approve;
     }
 
     public static Response enrollCourse(String courseId) {
 
-        Response response = given()
+        Response enrollresponse = given()
                 .contentType(contentType)
                 .body(enrollCoursePayload(courseId))
                 .header("Authorization", "Bearer " + token)
@@ -68,19 +68,11 @@ public class RequestBuilder {
                 .log().all()
                 .extract().response();
 
-        return response;
+        return enrollresponse;
     }
-    //public  static Response enrollCourse(String courseId) {
-
-    // return given()
-    //.spec(requestSpecification)
-    // .when()
-    // .post("/courses/" + courseId + "/enroll");
-
-
     public static Response getCourses() {
 
-        Response response = given()
+        Response courseresponse = given()
                 .contentType(contentType)
                 .header("Authorization", "Bearer " + token)
                 .log().all()
@@ -89,18 +81,14 @@ public class RequestBuilder {
                 .then()
                 .log().all()
                 .extract().response();
-
-        // Print the full response for debugging
-        response.prettyPrint();
-
-        // Extract the first course id
-        courseId = response.jsonPath().getString("data.courses[2].Id");
-        //System.out.println("Course ID = " + courseId);
-        return response;
+       // response.prettyPrint();
+        courseId = courseresponse.jsonPath().getString("data.courses[2].Id");
+        System.out.println("Course ID = " + courseId);
+        return courseresponse;
     }
     public static Response getMyEnrollments() {
 
-        Response response = given()
+        Response Enrollmentresponse = given()
                 .contentType(contentType)
                 .header("Authorization", "Bearer " + token)
                 .log().all()
@@ -111,7 +99,6 @@ public class RequestBuilder {
                 .extract()
                 .response();
 
-        return response;
+        return Enrollmentresponse;
     }
 }
-
