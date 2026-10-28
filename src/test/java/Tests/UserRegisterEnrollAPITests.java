@@ -13,7 +13,7 @@ import static requestBuilder.RequestBuilder.courseId;
 public class UserRegisterEnrollAPITests {
 
     @Test
-    @Description("As an api user i want to create the new user")
+    @Description("As an API user I want to create the new user")
     @Severity(SeverityLevel.BLOCKER)
     public void registerUserTests() {
         createUserResponse(firstName, lastName, email, password, confirmPassword, groupId).
@@ -23,7 +23,7 @@ public class UserRegisterEnrollAPITests {
     }
 
     @Test(dependsOnMethods = "registerUserTests")
-    @Description("As an api user i want to login as admin user")
+    @Description("As an API user I want to login as Admin user")
     @Severity(SeverityLevel.BLOCKER)
     public void loginAsAdminUserTests() {
         loginResponse(adminUsername, adminPassword).
@@ -33,7 +33,7 @@ public class UserRegisterEnrollAPITests {
     }
 
     @Test(dependsOnMethods = "loginAsAdminUserTests")
-    @Description("As an api user i want to approve the user")
+    @Description("As an admin I want to approve the new user")
     @Severity(SeverityLevel.BLOCKER)
     public void approveUserTests() {
         approveUser().
@@ -41,40 +41,17 @@ public class UserRegisterEnrollAPITests {
                 assertThat().
                 statusCode(Success_Status);
     }
-
-
-
-
-    @Test()
-    @Description("As an api user i want to register a user with different password")
+    @Test(dependsOnMethods = "approveUserTests")
+    @Description("As a API user I want to Login as newly approved user")
     @Severity(SeverityLevel.BLOCKER)
-    public void registerUserWithDifferentPasswordTests() {
-        createUserResponse(firstName, lastName, email, password, confirmPassword+1, groupId).
-                then().
-                assertThat().
-                statusCode(badRequest);
-    }
-    @Test(dependsOnMethods = "registerUserTests")
-    @Description("As an api user i want to register a user with existing email address")
-    @Severity(SeverityLevel.CRITICAL)
-    public void registerUserWithExistingEmailAddressTests() {
-        createUserResponse(firstName, lastName, email, password, confirmPassword, groupId).
-                then().
-                assertThat().
-                statusCode(badRequest);
-    }
-
-    @Test
-    @Description("As an api user i want to register a user with incorrect group id")
-    @Severity(SeverityLevel.NORMAL)
-    public void registerUserWithIncorrectGroupIdTests() {
-        createUserResponse(firstName, lastName, email, password, confirmPassword, groupId+000).
-                then().
-                assertThat().
-                statusCode(badRequest);
+    public void loginAsCreatedUserTests() {
+        loginResponse(email, password)
+                .then()
+                .assertThat()
+                .statusCode(Success_Status);
     }
     @Test(dependsOnMethods = "loginAsCreatedUserTests")
-    @Description("As an api user i want to get course list as a user")
+    @Description("As an API user I want to get the course list")
     @Severity(SeverityLevel.NORMAL)
     public void getCourseListTests() {
         getCourses().
@@ -83,19 +60,9 @@ public class UserRegisterEnrollAPITests {
                 statusCode(Success_Status);
     }
 
-    @Test(dependsOnMethods = "approveUserTests")
-    @Description("Login as newly approved user")
-    @Severity(SeverityLevel.BLOCKER)
-    public void loginAsCreatedUserTests() {
-
-        loginResponse(email, password)
-                .then()
-                .assertThat()
-                .statusCode(Success_Status);
-    }
     @Test(dependsOnMethods = "getCourseListTests")
     //@Test
-    @Description("As an api user i want to enroll the user to a course")
+    @Description("As an API user i want to enroll the user to a course")
     @Severity(SeverityLevel.BLOCKER)
     public void enrollUserToCourseTests() {
         enrollCourse(courseId).
@@ -103,8 +70,9 @@ public class UserRegisterEnrollAPITests {
                 assertThat().
                 statusCode(Creation_Success);
     }
+
     @Test(dependsOnMethods = "enrollUserToCourseTests")
-    @Description("Verify that user is enrolled in the course")
+    @Description("As an API user I want to verify that user is enrolled in the course")
     @Severity(SeverityLevel.BLOCKER)
     public void verifyUserEnrollmentTests() {
 
@@ -113,6 +81,38 @@ public class UserRegisterEnrollAPITests {
                 .assertThat()
                 .statusCode(Success_Status);
     }
+
+    @Description("As an API user I want to register a user with different password")
+    @Severity(SeverityLevel.BLOCKER)
+    public void registerUserWithDifferentPasswordTests() {
+        createUserResponse(firstName, lastName, email, password, confirmPassword+1, groupId).
+                then().
+                assertThat().
+                statusCode(badRequest);
+    }
+
+    @Description("As an API user I want to register a user with existing email address")
+    @Severity(SeverityLevel.CRITICAL)
+    public void registerUserWithExistingEmailAddressTests() {
+        createUserResponse(firstName, lastName, email, password, confirmPassword, groupId).
+                then().
+                assertThat().
+                statusCode(badRequest);
+    }
+
+    @Description("As an API user I want to register a user with incorrect group id")
+    @Severity(SeverityLevel.NORMAL)
+    public void registerUserWithIncorrectGroupIdTests() {
+        createUserResponse(firstName, lastName, email, password, confirmPassword, groupId+000).
+                then().
+                assertThat().
+                statusCode(badRequest);
+    }
+
+
+
+
+
 
 
 }

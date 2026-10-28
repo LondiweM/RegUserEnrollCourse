@@ -6,12 +6,14 @@ import static Common.BasePaths.ndosi_BaseURL;
 import static Common.ContentType.contentType;
 import static io.restassured.RestAssured.given;
 import static payloadBuilder.PayloadBuilder.*;
+import org.testng.Assert;
 
 public class RequestBuilder {
 
     public static String token;
     public static String userId;
     public static String courseId;
+    public static String enrolledCourseId;
 
     public static Response createUserResponse(String firstName, String lastName, String email, String password, String confirmPassword, String groupId) {
         Response response = given().
@@ -25,6 +27,12 @@ public class RequestBuilder {
                 extract().response();
 
         userId = response.jsonPath().getString("data.id");
+
+        Assert.assertEquals(response.getStatusCode(), 201);
+        Assert.assertNotNull(userId, "User ID was not returned");
+        Assert.assertFalse(userId.isEmpty(), "User ID was empty");
+        System.out.println("Created User ID: " + userId);
+
         return response;
     }
 
@@ -39,11 +47,13 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
         token = response.jsonPath().getString("data.token");
+        Assert.assertNotNull(token, "Token should not be null");
+        Assert.assertFalse(token.isEmpty(), "Token should not be empty");
         return response;
     }
 
     public static Response approveUser() {
-        Response approve = given().
+        Response response = given().
                 when().
                 contentType(contentType).
                 header("Authorization", "Bearer " + token).
@@ -52,12 +62,14 @@ public class RequestBuilder {
                 then().
                 log().all().
                 extract().response();
-        return approve;
+        Assert.assertEquals(response.getStatusCode(), 200,
+                "User approval was unsuccessful");
+        return response;
     }
 
     public static Response enrollCourse(String courseId) {
 
-        Response enrollresponse = given()
+        Response response = given()
                 .contentType(contentType)
                 .body(enrollCoursePayload(courseId))
                 .header("Authorization", "Bearer " + token)
@@ -68,11 +80,12 @@ public class RequestBuilder {
                 .log().all()
                 .extract().response();
 
-        return enrollresponse;
+    //Assert.assertEquals(response.getStatusCode(), 200, "Course enrollment was unsuccessful");
+        return response;
     }
     public static Response getCourses() {
 
-        Response courseresponse = given()
+        Response response = given()
                 .contentType(contentType)
                 .header("Authorization", "Bearer " + token)
                 .log().all()
@@ -81,14 +94,15 @@ public class RequestBuilder {
                 .then()
                 .log().all()
                 .extract().response();
-       // response.prettyPrint();
-        courseId = courseresponse.jsonPath().getString("data.courses[2].Id");
+        // response.prettyPrint();
+        courseId = response.jsonPath().getString("data.courses[2].Id");
         System.out.println("Course ID = " + courseId);
-        return courseresponse;
+        Assert.assertNotNull(response, "Course response should not be null");
+        return response;
     }
     public static Response getMyEnrollments() {
 
-        Response Enrollmentresponse = given()
+        Response response = given()
                 .contentType(contentType)
                 .header("Authorization", "Bearer " + token)
                 .log().all()
@@ -99,6 +113,15 @@ public class RequestBuilder {
                 .extract()
                 .response();
 
-        return Enrollmentresponse;
+         enrolledCourseId =
+                response.jsonPath()
+                        .getString("data.enrollments[0].Id");
+
+        System.out.println("Expected Course ID: " + courseId);
+        System.out.println("Actual Course ID: " + enrolledCourseId);
+
+        Assert.assertEquals(enrolledCourseId, courseId, "User was not enrolled in the expected course");
+
+        return response;
     }
 }

@@ -14,7 +14,6 @@ public class PayloadBuilder {
         userObject.addProperty("email", email);
         userObject.addProperty("password", password);
         userObject.addProperty("confirmPassword", confirmPassword);
-
         return userObject;
     }
 
@@ -28,7 +27,6 @@ public class PayloadBuilder {
 
         JsonObject enrollObject = new JsonObject();
         enrollObject.addProperty("courseId", courseId);
-
         return enrollObject;
     }
 
