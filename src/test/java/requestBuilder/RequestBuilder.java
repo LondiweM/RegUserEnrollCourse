@@ -33,6 +33,12 @@ public class RequestBuilder {
         Assert.assertNotNull(userId, "User ID was not returned");
         Assert.assertFalse(userId.isEmpty(), "User ID was empty");
         System.out.println("Created User ID: " + userId);
+        Allure.addAttachment(
+                "Get Create User Response",
+                "application/json",
+                response.asPrettyString(),
+                ".json"
+        );
 
         return response;
     }
@@ -135,8 +141,12 @@ public class RequestBuilder {
                 .then()
                 .log().all()
                 .extract().response();
-
-        //Assert.assertEquals(response.getStatusCode(), 200, "Course enrollment was unsuccessful");
+        Allure.addAttachment(
+                "Enroll Course Response",
+                "application/json",
+                response.asPrettyString(),
+                ".json"
+        );
         return response;
     }
     public static Response getMyEnrollments() {
@@ -160,6 +170,13 @@ public class RequestBuilder {
         System.out.println("Actual Course ID: " + enrolledCourseId);
 
         Assert.assertEquals(enrolledCourseId, courseId, "User was not enrolled in the expected course");
+
+        Allure.addAttachment(
+                "Get My Enrollments Response",
+                "application/json",
+                response.asPrettyString(),
+                ".json"
+        );
         return response;
     }
 }

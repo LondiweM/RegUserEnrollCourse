@@ -1,0 +1,14 @@
+{
+    "success": true,
+    "message": "Registration submitted successfully. Your account is pending admin approval.",
+    "data": {
+        "id": "4f977444-060e-4a76-ae5d-df46baef8c71",
+        "firstName": "Cyril",
+        "lastName": "Lind",
+        "email": "Cyril.Lind4016@gmail.com",
+        "groupId": "cdc7d817-b518-4d0c-a9fa-b8ae0585cd64",
+        "groupName": "20 Testingmine Class",
+        "approvalStatus": "pending",
+        "createdAt": "2026-10-30T19:21:35.000Z"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "success": true,
+    "message": "User approved successfully",
+    "data": {
+        "id": "adf97e40-f7a0-4680-87a8-66d28f0afc0d",
+        "firstName": "Talitha",
+        "lastName": "Mohr",
+        "email": "Talitha.Mohr8290@gmail.com",
+        "approvalStatus": "approved"
+    }
+}

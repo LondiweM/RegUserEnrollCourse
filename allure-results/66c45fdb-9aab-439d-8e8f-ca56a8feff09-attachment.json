@@ -1,0 +1,9 @@
+{
+    "success": true,
+    "message": "Successfully enrolled in course",
+    "data": {
+        "enrollmentId": "8f383e0a-ba1c-4791-95b6-ae3351d87e99",
+        "courseId": "21338952-8c10-4ab2-98ea-36bcd3858f94",
+        "courseTitle": "Software test automation"
+    }
+}

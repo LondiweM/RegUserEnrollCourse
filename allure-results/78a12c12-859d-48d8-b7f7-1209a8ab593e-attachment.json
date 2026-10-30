@@ -1,0 +1,28 @@
+{
+    "success": true,
+    "message": "Enrollments retrieved successfully",
+    "data": {
+        "enrollments": [
+            {
+                "Id": "21338952-8c10-4ab2-98ea-36bcd3858f94",
+                "Title": "Software test automation",
+                "Description": "Bootcamp for software test automators",
+                "ThumbnailUrl": "string",
+                "MeetingUrl": "string",
+                "Duration": "6 weeks",
+                "Level": "beginner",
+                "Category": "automation",
+                "Progress": 0,
+                "Status": "enrolled",
+                "EnrolledAt": "2026-10-30 18:40:53",
+                "CompletedAt": null
+            }
+        ],
+        "pagination": {
+            "total": 1,
+            "limit": 20,
+            "offset": 0,
+            "hasMore": false
+        }
+    }
+}

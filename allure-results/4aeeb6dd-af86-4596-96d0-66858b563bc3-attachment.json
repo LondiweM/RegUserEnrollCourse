@@ -1,0 +1,20 @@
+{
+    "success": true,
+    "message": "Login successful",
+    "data": {
+        "user": {
+            "id": "d4f1a470-54a2-4154-b533-c87d3e49b2cc",
+            "firstName": "admin",
+            "lastName": "admin",
+            "email": "admin@gmail.com",
+            "role": "admin",
+            "groupId": "cdc7d817-b518-4d0c-a9fa-b8ae0585cd64",
+            "groupName": "20 Testingmine Class",
+            "approvalStatus": "approved",
+            "createdAt": "2026-07-24 21:36:12",
+            "updatedAt": "2026-10-30 19:18:51"
+        },
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJkNGYxYTQ3MC01NGEyLTQxNTQtYjUzMy1jODdkM2U0OWIyY2MiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInNlc3Npb25JZCI6IjA5ZDM4MTVmLWI5YzktNDk5My05Y2RjLWY1NzRiZDI2MTQxZCIsImlhdCI6MTc5MzM4MDg5NiwiZXhwIjoxNzkzNDY3Mjk2fQ.pFYR-vNdhHFIzJgy0cA4kXbDTeEzt7t4EpMgUM5tAL0",
+        "sessionId": "09d3815f-b9c9-4993-9cdc-f574bd26141d"
+    }
+}

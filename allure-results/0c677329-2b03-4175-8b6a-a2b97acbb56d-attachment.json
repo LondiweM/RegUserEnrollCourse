@@ -1,0 +1,20 @@
+{
+    "success": true,
+    "message": "Login successful",
+    "data": {
+        "user": {
+            "id": "adf97e40-f7a0-4680-87a8-66d28f0afc0d",
+            "firstName": "Talitha",
+            "lastName": "Mohr",
+            "email": "Talitha.Mohr8290@gmail.com",
+            "role": "user",
+            "groupId": "cdc7d817-b518-4d0c-a9fa-b8ae0585cd64",
+            "groupName": "20 Testingmine Class",
+            "approvalStatus": "approved",
+            "createdAt": "2026-10-30 14:56:14",
+            "updatedAt": "2026-10-30 14:56:15"
+        },
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJhZGY5N2U0MC1mN2EwLTQ2ODAtODdhOC02NmQyOGYwYWZjMGQiLCJlbWFpbCI6IlRhbGl0aGEuTW9ocjgyOTBAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJzZXNzaW9uSWQiOiJmNzJhNmUyOC1hYzE1LTRjNTktYTE1ZS1kZDk3M2UwNWRiYjkiLCJpYXQiOjE3OTMzNjQ5NzYsImV4cCI6MTc5MzQ1MTM3Nn0.ZCtLczbHjC9QhgquhpmRqCEH6Up5AKah19c1oJNHNfc",
+        "sessionId": "f72a6e28-ac15-4c59-a15e-dd973e05dbb9"
+    }
+}

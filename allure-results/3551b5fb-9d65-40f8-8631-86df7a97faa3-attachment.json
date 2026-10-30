@@ -1,0 +1,20 @@
+{
+    "success": true,
+    "message": "Login successful",
+    "data": {
+        "user": {
+            "id": "d47972a4-480b-48d2-b6d7-b7f6db9654a2",
+            "firstName": "Jerald",
+            "lastName": "Gutkowski",
+            "email": "Jerald.Gutkowski2907@gmail.com",
+            "role": "user",
+            "groupId": "cdc7d817-b518-4d0c-a9fa-b8ae0585cd64",
+            "groupName": "20 Testingmine Class",
+            "approvalStatus": "approved",
+            "createdAt": "2026-10-30 18:40:50",
+            "updatedAt": "2026-10-30 18:40:52"
+        },
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJkNDc5NzJhNC00ODBiLTQ4ZDItYjZkNy1iN2Y2ZGI5NjU0YTIiLCJlbWFpbCI6IkplcmFsZC5HdXRrb3dza2kyOTA3QGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwic2Vzc2lvbklkIjoiOWRhZDMwZDYtZDdiOS00MzE0LTgzNTktZjAwNTA4MDY5YzRjIiwiaWF0IjoxNzkzMzc4NDUyLCJleHAiOjE3OTM0NjQ4NTJ9.A0D1OZGkrzp9ok7TROA_N_W529aOVKis7BnlfoOjvFc",
+        "sessionId": "9dad30d6-d7b9-4314-8359-f00508069c4c"
+    }
+}
