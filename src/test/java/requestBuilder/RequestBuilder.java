@@ -1,5 +1,6 @@
 package requestBuilder;
 
+import io.qameta.allure.Allure;
 import io.restassured.response.Response;
 
 import static Common.BasePaths.ndosi_BaseURL;
@@ -35,7 +36,26 @@ public class RequestBuilder {
 
         return response;
     }
+    private static void attachRequestAndResponse(
+            String requestName,
+            String requestBody,
+            String responseName,
+            Response response) {
 
+        if (requestBody != null) {
+            Allure.addAttachment(
+                    requestName,
+                    "application/json",
+                    requestBody,
+                    ".json");
+        }
+
+        Allure.addAttachment(
+                responseName,
+                "application/json",
+                response.asPrettyString(),
+                ".json");
+    }
     public static Response loginResponse(String userName, String password) {
         Response response = given().
                 when().
@@ -49,6 +69,12 @@ public class RequestBuilder {
         token = response.jsonPath().getString("data.token");
         Assert.assertNotNull(token, "Token should not be null");
         Assert.assertFalse(token.isEmpty(), "Token should not be empty");
+
+        Allure.addAttachment(
+                "Login Response",
+                "application/json",
+                response.asPrettyString(),
+                ".json");
         return response;
     }
 
@@ -64,25 +90,15 @@ public class RequestBuilder {
                 extract().response();
         Assert.assertEquals(response.getStatusCode(), 200,
                 "User approval was unsuccessful");
+        Allure.addAttachment(
+                "Approve User Response",
+                "application/json",
+                response.asPrettyString(),
+                ".json");
         return response;
     }
 
-    public static Response enrollCourse(String courseId) {
 
-        Response response = given()
-                .contentType(contentType)
-                .body(enrollCoursePayload(courseId))
-                .header("Authorization", "Bearer " + token)
-                .log().all()
-                .when()
-                .post(ndosi_BaseURL + "/courses/" + courseId + "/enroll")
-                .then()
-                .log().all()
-                .extract().response();
-
-    //Assert.assertEquals(response.getStatusCode(), 200, "Course enrollment was unsuccessful");
-        return response;
-    }
     public static Response getCourses() {
 
         Response response = given()
@@ -98,6 +114,29 @@ public class RequestBuilder {
         courseId = response.jsonPath().getString("data.courses[2].Id");
         System.out.println("Course ID = " + courseId);
         Assert.assertNotNull(response, "Course response should not be null");
+
+        Allure.addAttachment(
+                "Get Courses Response",
+                "application/json",
+                response.asPrettyString(),
+                ".json"
+        );
+        return response;
+    }
+    public static Response enrollCourse(String courseId) {
+
+        Response response = given()
+                .contentType(contentType)
+                .body(enrollCoursePayload(courseId))
+                .header("Authorization", "Bearer " + token)
+                .log().all()
+                .when()
+                .post(ndosi_BaseURL + "/courses/" + courseId + "/enroll")
+                .then()
+                .log().all()
+                .extract().response();
+
+        //Assert.assertEquals(response.getStatusCode(), 200, "Course enrollment was unsuccessful");
         return response;
     }
     public static Response getMyEnrollments() {
@@ -121,7 +160,6 @@ public class RequestBuilder {
         System.out.println("Actual Course ID: " + enrolledCourseId);
 
         Assert.assertEquals(enrolledCourseId, courseId, "User was not enrolled in the expected course");
-
         return response;
     }
 }

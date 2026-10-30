@@ -2,8 +2,10 @@ package Tests;
 
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import jdk.jfr.Description;
+//import jdk.jfr.Description;
 import org.testng.annotations.Test;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Description;
 
 import static Common.CommonTestData.*;
 import static Common.GenerateTestData.*;
@@ -36,6 +38,7 @@ public class UserRegisterEnrollAPITests {
     @Description("As an admin I want to approve the new user")
     @Severity(SeverityLevel.BLOCKER)
     public void approveUserTests() {
+        Allure.step("Login as approved user");
         approveUser().
                 then().
                 assertThat().
@@ -54,6 +57,7 @@ public class UserRegisterEnrollAPITests {
     @Description("As an API user I want to get the course list")
     @Severity(SeverityLevel.NORMAL)
     public void getCourseListTests() {
+        Allure.step("Retrieve course list");
         getCourses().
                 then().
                 assertThat().
@@ -69,6 +73,7 @@ public class UserRegisterEnrollAPITests {
                 then().
                 assertThat().
                 statusCode(Creation_Success);
+
     }
 
     @Test(dependsOnMethods = "enrollUserToCourseTests")
